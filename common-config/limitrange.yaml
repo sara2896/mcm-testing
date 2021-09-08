@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-limit
+
+---
+
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  name: "resource-limits"
+  namespace: test-limit
+spec:
+  limits:
+    - type: "Container"
+      max:
+        cpu: "2"
+        memory: "4Gi"
+      min:
+        cpu: "100m"
+        memory: "4Mi"
+      default:
+        cpu: "300m"
+        memory: "200Mi"
+      defaultRequest:
+        cpu: "200m"
+        memory: "100Mi"
+      maxLimitRequestRatio:
+        cpu: "10"
